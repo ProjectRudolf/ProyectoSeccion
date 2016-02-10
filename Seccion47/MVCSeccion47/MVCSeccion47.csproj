@@ -478,6 +478,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Images\logo.png" />
     <Content Include="Models\Seccion.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Seccion.edmx</DependentUpon>
@@ -739,7 +740,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

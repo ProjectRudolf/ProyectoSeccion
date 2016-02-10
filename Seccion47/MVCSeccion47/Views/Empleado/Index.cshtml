@@ -165,7 +165,6 @@
                 success: function (response) {
                     if (response) {
                         var table = $('#myTable').dataTable();
-                        //table.row($(this).parents('tr')).remove().draw();
                         table.fnReloadAjax();
                         alert("Los Datos de " + response + " se Dio de Baja Exitosamente.");
                     }
