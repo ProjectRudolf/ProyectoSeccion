@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,6 @@
         <div class="table-header breadcrumbs ace-save-state">
             <div class="breadcrumb">                
                 RESULTADO PARA LOS ULTIMOS REGISTRO DE EMPLEADOS
-                @*@Html.ActionLink("Nuevo Empleado", "Create")*@
                 <a href='@(Url.Action("Create", "Empleado"))' class="btn btn-white btn-info btn-bold"><i class="ace-icon fa fa-user-plus">    Nuevo Empleado</i></a>
             </div>           
             <div class="nav-search" id="nav-search">
@@ -67,10 +66,10 @@
     </div><!-- /.modal-dialog -->
 </div>
 
-@* Load datatable css *@
+
 @*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
 @section Scripts{
-    @* Load DataTable js here *@
+
     @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
 <script src="../assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="../assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
@@ -165,7 +164,6 @@
                 success: function (response) {
                     if (response) {
                         var table = $('#myTable').dataTable();
-                        //table.row($(this).parents('tr')).remove().draw();
                         table.fnReloadAjax();
                         alert("Los Datos de " + response + " se Dio de Baja Exitosamente.");
                     }
