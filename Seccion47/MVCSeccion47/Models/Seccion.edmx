@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SeccionBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+          </Key>
+          <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ficha" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApePa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApeMa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SituacionContractual" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UbicacionLaboral" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" />
+          <Property Name="Region" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClaveDepartamento" Type="varchar" MaxLength="50" />
+          <Property Name="Nivel" Type="int" Nullable="false" />
+          <Property Name="ClaveAsiste" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoCasa" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="50" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="50" />
+          <Property Name="Banco" Type="varchar" MaxLength="50" />
+          <Property Name="Sucursal" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroCuenta" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveInterbancaria" Type="varchar" MaxLength="50" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="300" />
+          <Property Name="Eliminacion" Type="bit" />
+          <Property Name="FechaInserta" Type="date" />
+          <Property Name="FechaModifica" Type="date" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="EstadosID" />
+          </Key>
+          <Property Name="EstadosID" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Municipios">
+          <Key>
+            <PropertyRef Name="MunicipiosID" />
+          </Key>
+          <Property Name="MunicipiosID" Type="int" Nullable="false" />
+          <Property Name="EstadosID" Type="int" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SeccionBD.dbo.vtaEmpleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vtaEmpleado">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+            <PropertyRef Name="Ficha" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="SituacionContractual" />
+            <PropertyRef Name="UbicacionLaboral" />
+            <PropertyRef Name="Region" />
+            <PropertyRef Name="Nivel" />
+            <PropertyRef Name="ClaveAsiste" />
+          </Key>
+          <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ficha" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="SituacionContractual" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UbicacionLaboral" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" />
+          <Property Name="Region" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nivel" Type="int" Nullable="false" />
+          <Property Name="ClaveAsiste" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Eliminacion" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Municipios" Type="Self.Municipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="EstadosID" />
+            </Principal>
+            <Dependent Role="Municipios">
+              <PropertyRef Name="EstadosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeccionBDModelStoreContainer">
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipios" EntityType="Self.Municipios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vtaEmpleado" EntityType="Self.vtaEmpleado" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vtaEmpleado].[EmpleadoID] AS [EmpleadoID], 
+    [vtaEmpleado].[Ficha] AS [Ficha], 
+    [vtaEmpleado].[Nombre] AS [Nombre], 
+    [vtaEmpleado].[SituacionContractual] AS [SituacionContractual], 
+    [vtaEmpleado].[UbicacionLaboral] AS [UbicacionLaboral], 
+    [vtaEmpleado].[Rol] AS [Rol], 
+    [vtaEmpleado].[Region] AS [Region], 
+    [vtaEmpleado].[Nivel] AS [Nivel], 
+    [vtaEmpleado].[ClaveAsiste] AS [ClaveAsiste], 
+    [vtaEmpleado].[Eliminacion] AS [Eliminacion]
+    FROM [dbo].[vtaEmpleado] AS [vtaEmpleado]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Estados" Association="Self.FK_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Municipios" EntitySet="Municipios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeccionBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SeccionBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Estados" EntityType="SeccionBDModel.Estados" />
+          <EntitySet Name="Municipios" EntityType="SeccionBDModel.Municipios" />
+          <AssociationSet Name="FK_Estados" Association="SeccionBDModel.FK_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Municipios" EntitySet="Municipios" />
+          </AssociationSet>
+          <EntitySet Name="Empleado" EntityType="SeccionBDModel.Empleado" />
+          <EntitySet Name="vtaEmpleado" EntityType="SeccionBDModel.vtaEmpleado" />
+        </EntityContainer>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="EstadosID" />
+          </Key>
+          <Property Name="EstadosID" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Municipios" Relationship="SeccionBDModel.FK_Estados" FromRole="Estados" ToRole="Municipios" />
+        </EntityType>
+        <EntityType Name="Municipios">
+          <Key>
+            <PropertyRef Name="MunicipiosID" />
+          </Key>
+          <Property Name="MunicipiosID" Type="Int32" Nullable="false" />
+          <Property Name="EstadosID" Type="Int32" Nullable="false" />
+          <Property Name="Municipio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estados" Relationship="SeccionBDModel.FK_Estados" FromRole="Municipios" ToRole="Estados" />
+        </EntityType>
+        <Association Name="FK_Estados">
+          <End Type="SeccionBDModel.Estados" Role="Estados" Multiplicity="1" />
+          <End Type="SeccionBDModel.Municipios" Role="Municipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="EstadosID" />
+            </Principal>
+            <Dependent Role="Municipios">
+              <PropertyRef Name="EstadosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+          </Key>
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ficha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApePa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApeMa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RFC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SituacionContractual" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UbicacionLaboral" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Region" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveDepartamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nivel" Type="Int32" Nullable="false" />
+          <Property Name="ClaveAsiste" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCasa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Banco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveInterbancaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Eliminacion" Type="Boolean" />
+          <Property Name="FechaInserta" Type="DateTime" Precision="0" />
+          <Property Name="FechaModifica" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="vtaEmpleado">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+            <PropertyRef Name="Ficha" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="SituacionContractual" />
+            <PropertyRef Name="UbicacionLaboral" />
+            <PropertyRef Name="Region" />
+            <PropertyRef Name="Nivel" />
+            <PropertyRef Name="ClaveAsiste" />
+          </Key>
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ficha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="SituacionContractual" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UbicacionLaboral" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Region" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nivel" Type="Int32" Nullable="false" />
+          <Property Name="ClaveAsiste" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Eliminacion" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeccionBDModelStoreContainer" CdmEntityContainer="SeccionBD">
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="SeccionBDModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstadosID" ColumnName="EstadosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipios">
+            <EntityTypeMapping TypeName="SeccionBDModel.Municipios">
+              <MappingFragment StoreEntitySet="Municipios">
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="EstadosID" ColumnName="EstadosID" />
+                <ScalarProperty Name="MunicipiosID" ColumnName="MunicipiosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="SeccionBDModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+                <ScalarProperty Name="FechaInserta" ColumnName="FechaInserta" />
+                <ScalarProperty Name="Eliminacion" ColumnName="Eliminacion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="ClaveInterbancaria" ColumnName="ClaveInterbancaria" />
+                <ScalarProperty Name="NumeroCuenta" ColumnName="NumeroCuenta" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="TelefonoCasa" ColumnName="TelefonoCasa" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="ClaveAsiste" ColumnName="ClaveAsiste" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="ClaveDepartamento" ColumnName="ClaveDepartamento" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="UbicacionLaboral" ColumnName="UbicacionLaboral" />
+                <ScalarProperty Name="SituacionContractual" ColumnName="SituacionContractual" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="ApeMa" ColumnName="ApeMa" />
+                <ScalarProperty Name="ApePa" ColumnName="ApePa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ficha" ColumnName="Ficha" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vtaEmpleado">
+            <EntityTypeMapping TypeName="SeccionBDModel.vtaEmpleado">
+              <MappingFragment StoreEntitySet="vtaEmpleado">
+                <ScalarProperty Name="Eliminacion" ColumnName="Eliminacion" />
+                <ScalarProperty Name="ClaveAsiste" ColumnName="ClaveAsiste" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="UbicacionLaboral" ColumnName="UbicacionLaboral" />
+                <ScalarProperty Name="SituacionContractual" ColumnName="SituacionContractual" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ficha" ColumnName="Ficha" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

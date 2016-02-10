@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>REGISTRO DE EMPLEADOS</h2>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-header breadcrumbs ace-save-state">
+            <div class="breadcrumb">                
+                RESULTADO PARA LOS ULTIMOS REGISTRO DE EMPLEADOS
+                @*@Html.ActionLink("Nuevo Empleado", "Create")*@
+                <a href='@(Url.Action("Create", "Empleado"))' class="btn btn-white btn-info btn-bold"><i class="ace-icon fa fa-user-plus">    Nuevo Empleado</i></a>
+            </div>           
+            <div class="nav-search" id="nav-search">
+                <div class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Buscar ..." class="nav-search-input" id="txtEmployeeName" autocomplete="off">
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table id="myTable" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Ficha</th>
+                        <th>Nombre</th>
+                        <th>Situacion Contractual</th>
+                        <th>Ubicacion Laboral</th>
+                        <th>Rol</th>
+                        <th>Region</th>
+                        <th>Nivel</th>
+                        <th>Clave Asiste</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="dialogEliminar" class="modal fade">
+    <!-- /.modal -->
+    <div class="modal-dialog modal-sm">
+        <!-- /.modal-dialog -->
+        <div class="modal-content">
+            <!-- /.modal-content -->
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar !!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info bigger-110">
+                    Este Registro se Dara de Baja, Quedara Como Historial.
+                </div>
+                <p class="bigger-110 bolder center grey">
+                    <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+                    Desea Continuar con la Baja del Registro?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="Delete" class="btn btn-success" >SI</button>
+                <button  type="button" data-dismiss="modal" class="btn btn-danger">NO</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+@* Load datatable css *@
+@*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+@section Scripts{
+    @* Load DataTable js here *@
+    @*<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>*@
+<script src="../assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="../assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
+<script src="../assets/js/dataTables/extensions/Buttons/js/dataTables.buttons.js"></script>
+<script src="../assets/js/dataTables/extensions/Select/js/dataTables.select.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.10/api/fnReloadAjax.js"></script>
+
+    <script>
+        $(document).ready(function () {
+           LoadData();
+            $(document).on("click", ".red", function () {
+                var id = $(this).attr("value");
+                $('#dialogEliminar').modal({ backdrop: 'static', keyboard: false })
+                 .one('click', '#Delete', function () {
+                     deleteData(id);
+                     $('#dialogEliminar').modal('hide');
+                 });
+            });
+        });
+
+        function LoadData()
+        {
+            $("#myTable").DataTable({
+                "bProcessing": true, // for show progress bar
+                "bServerSide": true, // for process server side
+                //"bfilter": false, // this is for disable filter (search box)
+                "dom": '<"top"i>rt<"bottom"lp><"clear">',
+                "bLengthChange": false,
+                "orderMulti": false, // for disable multiple column at once
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                "ajax": {
+                    "url": "/Empleado/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                        { "data": "Ficha", "name": "Ficha" },
+                        { "data": "Nombre", "name": "Nombre" },
+                        { "data": "SituacionContractual", "name": "SituacionContractual" },
+                        { "data": "UbicacionLaboral", "name": "UbicacionLaboral" },
+                        { "data": "Rol", "name": "Rol" },
+                        { "data": "Region", "name": "Region" },
+                        { "data": "Nivel", "name": "Nivel" },
+                        { "data": "ClaveAsiste", "name": "ClaveAsiste" },
+                        {
+                            "data": "EmpleadoID",
+                            "bSearchable": false,
+                            "bSortable": false,
+                            "mRender": function (oObj) {
+                                return '<a class=\"green" href=\"Edit/' + oObj + '"><i class="ace-icon fa fa-pencil bigger-160"></i></a>   <a class=\"blue" href=\"Details/' + oObj + '"><i class="ace-icon fa fa-search-plus bigger-160"></i></a>  <aspan style="cursor:pointer;" class=\"red" value="' + oObj + '"><i class="ace-icon fa fa-trash-o bigger-160"></i></a>';
+                            }
+                        }
+
+                ]
+            });
+            //Apply Custom search on jQuery DataTables here
+            oTable = $('#myTable').DataTable();
+            $('#txtEmployeeName').keydown(function () {
+                oTable.columns(0).search($('#txtEmployeeName').val().trim());
+                oTable.draw();
+            });
+        }
+
+        function deleteData(id) {
+            $.ajax({
+                type: "POST",
+                url: "/Empleado/DeleteConfirmed",
+                data: "{id:" + id + "}",
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (response) {
+                    if (response) {
+                        var table = $('#myTable').dataTable();
+                        //table.row($(this).parents('tr')).remove().draw();
+                        table.fnReloadAjax();
+                        alert("Los Datos de " + response + " se Dio de Baja Exitosamente.");
+                    }
+                    else {
+                        alert("Hay un Error, no se pudieron Eliminar los Datos.");
+                    }
+                },
+                error: function (response) {
+                    alert(response.status + ' ' + response.statusText);
+                }
+            });
+            return false;
+        }
+    </script>
+}
+
+
+

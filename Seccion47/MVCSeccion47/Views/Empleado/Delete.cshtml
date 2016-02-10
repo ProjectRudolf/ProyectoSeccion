@@ -1,0 +1,225 @@
+﻿@model MVCSeccion47.Models.Empleado
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ficha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ficha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApePa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApePa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApeMa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApeMa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RFC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RFC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SituacionContractual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SituacionContractual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UbicacionLaboral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UbicacionLaboral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaveDepartamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaveDepartamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nivel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nivel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaveAsiste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaveAsiste)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Domicilio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Domicilio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoCasa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoCasa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoCelular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoCelular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Banco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Banco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sucursal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sucursal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaveInterbancaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaveInterbancaria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInserta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInserta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaModifica)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,195 @@
+﻿@model MVCSeccion47.Models.Empleado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DETALLE DEL EMPLEADO</h2>
+<a href='@(Url.Action("Edit", "Empleado", new { id = Model.EmpleadoID }))' class="btn btn-success"><i class="ace-icon fa fa-pencil bigger-130">      EDITAR</i></a>
+<a href='@(Url.Action("Index", "Empleado"))' class="btn btn-danger"><i class="ace-icon fa fa-reply icon-only">     REGRESAR</i></a>
+<div class="table-detail">
+    <div class="row">
+        <div class="col-xs-12 col-sm-2">
+        </div>
+
+        <div class="col-xs-12 col-sm-7">
+            <div class="space visible-xs"></div>
+            <div class="profile-user-info profile-user-info-striped">
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Ficha </div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Ficha)</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Nombre </div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Nombre)</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Apellido Paterno </div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.ApePa)</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Apellido Materno </div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.ApeMa)</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> RFC</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.RFC)</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Situacion Contractual </div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.SituacionContractual)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Ubicacion Laboral</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.UbicacionLaboral)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Rol</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Rol)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Region</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Region)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Clave Departamento</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.ClaveDepartamento)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Nivel</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Nivel)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Clave Asiste</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.ClaveAsiste)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Domicilio</div>
+
+                    <div class="profile-info-value">
+                        <i class="fa fa-map-marker light-orange bigger-110"></i>
+                        <span>@Html.DisplayFor(model => model.Domicilio)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Estado</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Estado)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Ciudad</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Ciudad)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Telefono Casa</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.TelefonoCasa)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Telefono Celular</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.TelefonoCelular)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Correo Electronico</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.CorreoElectronico)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Banco</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Banco)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Sucursal</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Sucursal)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Numero Cuenta</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.NumeroCuenta)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Clave Interbancaria</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.ClaveInterbancaria)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Observaciones</div>
+
+                    <div class="profile-info-value">
+                        <span>@Html.DisplayFor(model => model.Observaciones)</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3">
+        </div>
+    </div>
+    <a href='@(Url.Action("Edit", "Empleado", new { id = Model.EmpleadoID }))' class="btn btn-success"><i class="ace-icon fa fa-pencil bigger-130">      EDITAR</i></a>
+    <a href='@(Url.Action("Index", "Empleado"))' class="btn btn-danger"><i class="ace-icon fa fa-reply icon-only">     REGRESAR</i></a>
+</div>
